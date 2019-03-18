@@ -21,4 +21,13 @@ spec:
         limits:
           cpu: 0.2
           memory: "10Mi"
-          
+
+
+
+
+
+### NOTE ABOUT THIS YAML FILE:        
+
+# pod is made up of one container (the monolith).
+# passing a few arguments to the container when it starts up.
+# opening up port 80 for http traffic.
