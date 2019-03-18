@@ -1,6 +1,32 @@
+===================
+USERS AND PROJECTS
+===================
 gcloud auth list (see project users)
 gcloud config list project (see project ID)
+
+==================
+REGIONS AND ZONES
+==================
 gcloud config set compute/region us-central1 (set region)
 gcloud config set compute/zone us-central1-a (set zone)
+
+=========================
+COMPUTE ENGINE INSTANCES
+=========================
 gcloud compute instances list (list compute engine machines)
-gcloud compute instances create vm-1 --subnet subnet-1 --zone us-central1-a (create istance with name vm-1 on subnet-1 in zone us-central1-a)
+
+===========
+KUBERNETES
+===========
+gcloud container clusters create test (start up a cluster nnamed test)
+kubectl run nginx --image=nginx:1.10.0 (launch a single instance of the nginx container)
+kubectl get pods (see running containers in pods)
+kubectl expose deployment nginx --port 80 --type LoadBalancer (expose nginx container on port 80 with a LoadBalancer)
+kubectl get services (list services)
+kubectl create -f pods/monolith.yaml (create a pod from the monolith.yaml file)
+
+
+
+
+
+
