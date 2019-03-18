@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: "monolith"
+spec:
+  selector:
+    app: "monolith"
+    secure: "enabled"
+  ports:
+    - protocol: "TCP"
+      port: 443
+      targetPort: 443
+      nodePort: 31000
+  type: NodePort
+  
+  
+  
+  
+  ### NOTE ABOUT THIS FILE:
+  # There's a selector which is used to automatically find and expose any pods with the labels "app=monolith" and "secure=enabled"
+  # Nodeport will be used to forward external traffic from port 31000 to nginx on port 443.
