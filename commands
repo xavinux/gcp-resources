@@ -13,7 +13,12 @@ gcloud config set compute/zone us-central1-a (set zone)
 =========================
 COMPUTE ENGINE INSTANCES
 =========================
-gcloud compute instances list (list compute engine machines)
+gcloud compute instances list (list compute engine machines with parameters)
+
+===============
+FIREWALL RULES
+===============
+gcloud compute firewall-rules create allow-test-nodeport --allow=tcp:25000 (allow traffic to the test service on the exposed nodeport 25000)
 
 ===========
 KUBERNETES
@@ -29,3 +34,7 @@ kubectl exec test --stdin --tty -c test /bin/sh (run an interactive shell on the
 kubectl run nginx --image=nginx:1.10.0 (launch an nginx container)
 kubectl expose deployment nginx --port 80 --type LoadBalancer (expose nginx container on port 80 with a LoadBalancer service)
 kubectl get services (list kubernetes services)
+kubectl create -f services/test.yaml (create kubernetes service from the test.yaml file)
+kubectl get pods -l "app=test" (list pods with the test label)
+kubectl label pods test 'secure=enabled' (add the secure=enabled to the test pod)
+kubectl describe services test | grep Endpoints (list endpoints on the test service)
