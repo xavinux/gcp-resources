@@ -24,9 +24,3 @@ kubectl get pods (see running containers in pods)
 kubectl expose deployment nginx --port 80 --type LoadBalancer (expose nginx container on port 80 with a LoadBalancer)
 kubectl get services (list services)
 kubectl create -f pods/monolith.yaml (create a pod from the monolith.yaml file)
-
-
-
-
-
-
