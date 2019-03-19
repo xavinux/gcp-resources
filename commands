@@ -19,7 +19,8 @@ gcloud compute instance-templates create test-template --metadata-from-file star
 gcloud compute target-pools create test-pool (create a target pool to allow a single access point to all the instances in a group)
 gcloud compute instance-groups managed create group-1 --base-instance-name vm --size 2 --template template-1 --target-pool test-pool (create a managed instance group named group-1, with 2 instances prefixed with vm, using template-1 and the test-pool as target)
 gcloud compute http-checks create http-basic-check (create a health check named http-checks that verify that instance is responding to http or https)
-gcloud compute instance-groups managed set-named-ports group-1 --named-ports http:80 (TODO)
+gcloud compute instance-groups managed set-named-ports group-1 --named-ports http:80 (create an HTTP service and map a port name tco the relevant port for a managed instance group)
+gcloud compute backend-services create test-backend --protocol HTTP --http-checks http-basic-check --global (TODO)
 
 ===============
 FIREWALL RULES
