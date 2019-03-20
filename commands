@@ -10,17 +10,20 @@ REGIONS AND ZONES
 gcloud config set compute/region us-central1 (set region)
 gcloud config set compute/zone us-central1-a (set zone)
 
-=========================
-COMPUTE ENGINE INSTANCES
-=========================
+===============
+COMPUTE ENGINE 
+===============
 gcloud compute instances list (list compute engine machines with parameters)
 gcloud compute instances create test-1 --subnet subnet-1 --zone us-central1-a --tags http (create an instance named test-1 connected to subnet-1 in the us-central1-a zone with the http tag)
 gcloud compute instance-templates create test-template --metadata-from-file startup-script=startup.sh (create an instance template from the startup script)
 gcloud compute target-pools create test-pool (create a target pool to allow a single access point to all the instances in a group)
 gcloud compute instance-groups managed create group-1 --base-instance-name vm --size 2 --template template-1 --target-pool test-pool (create a managed instance group named group-1, with 2 instances prefixed with vm, using template-1 and the test-pool as target)
-gcloud compute http-checks create http-basic-check (create a health check named http-checks that verify that instance is responding to http or https)
 gcloud compute instance-groups managed set-named-ports group-1 --named-ports http:80 (create an HTTP service and map a port name tco the relevant port for a managed instance group)
-gcloud compute backend-services create test-backend --protocol HTTP --http-checks http-basic-check --global (TODO)
+gcloud compute http-health-checks create http-check (create a health check named http-check that verify that instance is responding to http or https)
+gcloud compute backend-services create test-backend --protocol HTTP --http-health-checks http-check --global (create a global backend service named test-backend with http protocol health check named http-check)
+gcloud compute backend-services add-backend test-backend --instance-group group-1 --instance-group-zone us-central1-a --global (add the instacne group named group-1 located at the us-central1-a zone, to the global backend service named test-backend)
+gcloud compute url-maps create http-map --default-service test-backend (create a default url map named http-map that directs all incoming requests to all instances in the backend named test-backend)
+
 
 ===============
 FIREWALL RULES
