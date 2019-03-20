@@ -25,6 +25,17 @@ gcloud compute backend-services add-backend test-backend --instance-group group-
 gcloud compute url-maps create http-map --default-service test-backend (create a default url map named http-map that directs all incoming requests to all instances in the backend named test-backend)
 gcloud compute target-http-proxies create http-lb-proxy --url-map uy (create a target http proxy named http-lb-proxy and route requests to the url map named http-map)
 
+==============
+CLOUD STORAGE
+==============
+gsutil mb gs://test-1/ (create the test-1 bucket)
+gsutil cp gcp.jpg gs://test-1 (upload the gcp.jpg image to the test-1 bucket)
+gsutil cp -r gs://test-1/gcp.jpg . (download the gcp.jpg image from the test-1 bucket)
+gsutil cp gs://test-1/gcp.jpg gs://test-1/image-dir/ (create the image-dir directory in the test-1 bucket and copy the gcp.jpg file into it)
+gsutil ls gs://test-1 (list the content of the test-1 bucket)
+gsutil ls -l gs://test-1/gcp.jpg (list details of the gcp.jpg file upoaded into the test-1 bucket)
+
+
 ===============
 FIREWALL RULES
 ===============
@@ -60,3 +71,16 @@ NETWORKS
 ==========
 gcloud compute networks create test --subnet-mode custom (create a custom network named test)
 gcloud compute networks subnets create subnet-us-central --network test --region us-central1 --range 10.10.0.0/16 (create a subnet in the us-central1 region for the test network)
+
+========
+PUB/SUB
+========
+gcloud pubsub topics create testing (create a pubsub topic named testing)
+gcloud pubsub topics list (list all the pubsub topics created)
+gcloud pubsub topics list-subscriptions testing (list subscriptions to the testing topic)
+gcloud pubsub topics delete testing (delete the pubsub testing topic)
+gcloud  pubsub subscriptions create --topic testing subs (create a subscription named subs to the testing topic)
+gcloud pubsub subscriptions delete subs (delete the subs subscription)
+gcloud pubsub topics publish testing --message "New" (publish the message "New" to the testing topic)
+gcloud pubsub subscriptions pull subs --auto-ack (pull published messages from the pubsub topic)
+gcloud pubsub subscriptions pull testing --auto-ack --limit=3 (pull the 3 published messages from the testing topic because of the --limit flag number)
