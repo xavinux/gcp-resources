@@ -23,7 +23,7 @@ gcloud compute http-health-checks create http-check (create a health check named
 gcloud compute backend-services create test-backend --protocol HTTP --http-health-checks http-check --global (create a global backend service named test-backend with http protocol health check named http-check)
 gcloud compute backend-services add-backend test-backend --instance-group group-1 --instance-group-zone us-central1-a --global (add the instacne group named group-1 located at the us-central1-a zone, to the global backend service named test-backend)
 gcloud compute url-maps create http-map --default-service test-backend (create a default url map named http-map that directs all incoming requests to all instances in the backend named test-backend)
-
+gcloud compute target-http-proxies create http-lb-proxy --url-map uy (create a target http proxy named http-lb-proxy and route requests to the url map named http-map)
 
 ===============
 FIREWALL RULES
@@ -31,7 +31,9 @@ FIREWALL RULES
 gcloud compute firewall-rules create http-firewall --allow tcp:80 (create a rule named http-firewall to allow connections on port 80 )
 gcloud compute firewall-rules create http --allow tcp:80 --network test --source-ranges 0.0.0.0/0 --target-tags http (create a rule named http to allow traffic to port 80 in the test network to instances with the http tags from any Internet IP)
 gcloud compute forwarding-rules create test --region us-central1 --ports=80 --target-pool test-pool (create a forwarding rule named test in us-central1 region,to allow traffic on port 80 to a pool of instances named test-pool)
+gcloud compute forwarding-rules create http-rule --global --target-http-proxy http-lb-proxy --ports 80 (create a global forwarding rule named http-rule that sends traffic to the http-lb-proxy target proxy depending on IP address, IP protocol, and port)
 gcloud compute forwarding-rules list (list Compute Engine forwarding rules on a project)
+gcloud compute forwarding-rules list (list all forwarding rules)
 
 ===========
 KUBERNETES
