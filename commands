@@ -34,7 +34,9 @@ gsutil cp -r gs://test-1/gcp.jpg . (download the gcp.jpg image from the test-1 b
 gsutil cp gs://test-1/gcp.jpg gs://test-1/image-dir/ (create the image-dir directory in the test-1 bucket and copy the gcp.jpg file into it)
 gsutil ls gs://test-1 (list the content of the test-1 bucket)
 gsutil ls -l gs://test-1/gcp.jpg (list details of the gcp.jpg file upoaded into the test-1 bucket)
-
+gsutil acl ch -u AllUsers:R gs://test-1/gcp.jpg (make the object gcp.jpg in the test-1 bucket publicly accessible)
+gsutil acl ch -d AllUsers gs://test-1/gcp.jpg (remove public access to the gcp.jpg object in the test-1 bucket)
+gsutil rm gs://test-1/gcp.jpg (delete the gcp.jpg object from the test-1 bucket)
 
 ===============
 FIREWALL RULES
